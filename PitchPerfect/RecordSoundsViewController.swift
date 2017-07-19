@@ -13,6 +13,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
 //    MARK: Setup
     
+    //    Added a UIAlertController to alert the user if recording fails
+    var alertRecordingFailedController: UIAlertController = UIAlertController()
+    
     var audioRecorder: AVAudioRecorder!
 
     @IBOutlet weak var recordingLabel: UILabel!
@@ -23,10 +26,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         super.viewDidLoad()
         stopRecordingButton.isEnabled = false
     }
+
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+   
    
 //    MARK: Start/Stop Recording
     
@@ -62,7 +64,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if flag {
             performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
         } else {
-            print("recording was not successful")
+            alertRecordingFailedController = UIAlertController(title: "Error", message: "Recording Failed", preferredStyle: .alert)
+            self.present(alertRecordingFailedController, animated: true, completion: nil)
         }
     }
     
