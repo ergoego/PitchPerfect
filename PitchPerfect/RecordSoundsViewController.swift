@@ -27,9 +27,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopRecordingButton.isEnabled = false
     }
 
-    
-   
-   
 //    MARK: Start/Stop Recording
     
     @IBAction func recordAudio(_ sender: UIButton) {
@@ -80,7 +77,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 //    MARK: UI Toggling to Enable/Disable Recording
     
     func toggleUIRecording(recording: Bool) {
-        if recording {
+        recordingLabel.text = recording ? "Recording in Progress" : "Tap to Record"
+        stopRecordingButton.isEnabled = recording
+        recordButton.isEnabled = !recording
+        
+        /* if recording {
             recordingLabel.text = "Recording in Progress"
             stopRecordingButton.isEnabled = true
             recordButton.isEnabled = false
@@ -89,7 +90,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordingLabel.text = "Tap to Record"
             recordButton.isEnabled = true
             stopRecordingButton.isEnabled = false
-        }
+        } this original block has been refactored */
     }
     
 }
